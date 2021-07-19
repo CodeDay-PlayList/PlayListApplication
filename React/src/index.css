@@ -48,12 +48,30 @@ body {
   font-size: 16px;
   text-align: center;
   padding: 50px;
+  background: #ebeaea;
+}
+
+.tapuploadchange {
+  display: none;
+  visibility: hidden;
+}
+
+.tapuploadfile {
+  padding: 100px;
+  padding-bottom: 123px;
+  text-align: center;
+  background: #ebeaea;
+}
+
+.inactive {
+  display: none;
+  visibility: hidden;
 }
 
 .uploadbutton {
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 15px;
 }
 
 .uploadbutton button {
@@ -66,10 +84,10 @@ body {
   font-size: 16px;
   border-radius: 15px;
   box-shadow: 0 2px 5px;
-  background: #fdbb2d;
+  background: #22c1c3;
   border: none;
 }
 
 .uploadbutton button:hover {
-  box-shadow: 0px 1px 4px;
+  box-shadow: 0px 1px 2px;
 }
