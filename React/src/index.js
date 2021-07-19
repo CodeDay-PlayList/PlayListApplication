@@ -5,11 +5,11 @@ import { CameraOutline } from "react-ionicons";
 
 function ImageUpload() {
   const inputFileRef = useRef(null);
-
-  // let fileName;
+  const [isActive, setActive] = useState("false");
+  const [previewChange, previewSet] = useState("image");
 
   const onFileChange = (e) => {
-    // fileName = `Selected File - ${e.target.files[0].name}`;
+    previewSet(URL.createObjectURL(e.target.files[0]));
     console.log(`Selected File - ${e.target.files[0].name}`);
   };
 
@@ -18,21 +18,17 @@ function ImageUpload() {
     setActive(!isActive);
   };
 
-  const [isActive, setActive] = useState("false");
-
   return (
     <div className="imageupload">
       <header className="title">
         <h2>PlayFest</h2>
       </header>
       <div className={isActive ? "inactive" : "tapuploadfile"}>
-        <label htmlFor="file" onChange={onFileChange}>
-          fileName
-        </label>
+        <img src={previewChange} alt="image" />
       </div>
       <div className={isActive ? "tapupload" : "inactive"} onClick={onBtnClick}>
         <CameraOutline color={"#00000"} height="100px" width="100px" />
-        <p>Take a Picture Or Browse your library to Upload a photo</p>
+        <p>Tap to Take a Picture Or Browse your library to Upload a photo</p>
       </div>
       <div className="uploadbutton">
         <input
