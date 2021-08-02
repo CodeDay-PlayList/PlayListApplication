@@ -4,16 +4,19 @@ import ReactDom from "react-dom";
 import "./index.css";
 import { CameraOutline } from "react-ionicons";
 import Tesseract from "tesseract.js";
+// import myText from "./ArtistList.txt";
+// const fetch = require("node-fetch");
 
 function ImageUpload() {
   const inputFileRef = useRef(null);
   const [isActive, setActive] = useState("false");
   const [previewChange, previewSet] = useState("image");
-  const [fufilledImage, currentImg] = useState(null);
+  const [fufilledImage, currentImg] = useState([]);
+  // const [database, setDatabase] = useState([]);
 
   const onFileChange = (e) => {
     previewSet(URL.createObjectURL(e.target.files[0]));
-    currentImg(artistStrip(e.target.files[0]));
+    artistStrip(e.target.files[0]);
     console.log(`Selected File - ${e.target.files[0].name}`);
   };
 
@@ -22,12 +25,55 @@ function ImageUpload() {
     setActive(!isActive);
   };
 
+  // const artistStrip = async (img) => {
+  //   Tesseract.recognize(img, "eng", {
+  //     logger: (m) => console.log(m),
+  //   }).then(({ data: { words } }) => {
+  //     let finResults = [];
+  //     let results = words.filter((word) => word.confidence >= 80);
+  //     results.forEach((word) => finResults.push(word.text));
+  //     console.log(words);
+  //     console.log(finResults);
+  //     currentImg(finResults);
+  //   });
+  // };
+
+  // const dbText = () => {
+  //   setDatabase(
+  //     fetch(myText)
+  //       .then((r) => r.text())
+  //       .then((text) => {
+  //         text
+  //           .replace(/(\r)/gm, " ")
+  //           .split("\n")
+  //           .map((x) => x.trim());
+  //       })
+  //   );
+  // };
+
   const artistStrip = async (img) => {
     Tesseract.recognize(img, "eng", {
       logger: (m) => console.log(m),
-    }).then(({ data: { words } }) => {
-      console.log(`Hello ${words}`);
-      return words;
+    }).then(({ data: { text } }) => {
+      let manipulateText = text
+        .toLowerCase()
+        .replace(/the/g, "")
+        .replace(/and/g, "")
+        .replace(/its/g, "")
+        .replace(/(\r\n|\n|\r)/gm, " ")
+        .replace(/[^\w\s]|_/g, "")
+        .split(" ")
+        .filter((item) => item.length > 2);
+      // dbText();
+      // console.log(database);
+      // let reader = new FileReader();
+      // reader.readAsText(myText);
+      // reader.onload = () => {
+      //   console.log(reader.result);
+      // };
+
+      console.log(manipulateText);
+      currentImg(manipulateText);
     });
   };
 
