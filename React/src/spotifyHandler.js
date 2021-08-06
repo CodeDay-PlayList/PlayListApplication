@@ -13,13 +13,13 @@ const SpotifyHandler = async (artists) => {
 
   // credentials are optional
   const spotifyApi = new SpotifyWebApi({
-    clientId: 'b676f39d33f74696a8b8304c52a07a43',
-    clientSecret: 'd9f5fe324ef44216baeeaff9ded08f69',
-    redirectUri: 'http://www.playfest.com.s3-website-us-east-1.amazonaws.com/'
+    clientId: 'CLIENT ID',
+    clientSecret: 'CLIENT SECRET',
+    redirectUri: 'REDIRECT URI'
   });
 
 
-  spotifyApi.setAccessToken('BQCdpFjsQAudn88Uvquea1ExjRJmXPxEa_NkgZSuzg6r-4vv6rZww_PXhLVyEZZJtzziK1GwpTXdSXTC6z-jo3txDz5PS9BtJhJ9OjFwOglwe9FRXUfMwCuW8rSQ9CQ3YnCVkrTzAZ4wLgsVQJlJ_ZLtVUSUMo1sbcS5oxGb8wwjXuFgIxTzg1t8hHDibaPX_wYlPj3xa0hGTjPOz9VPCRCv2Rvu');
+  spotifyApi.setAccessToken('TOKEN');
 
 
 // Create a private playlist
