@@ -31,30 +31,32 @@ const SpotifyHandler = async (artists) => {
     });
 
   for (let i = 0; i < artists.length; i++) {
-    spotifyApi.searchArtists(artists[i]).then(
-      function(data) {
-        const artistID = data.body.artists.items.sort((a,b) => (a.popularity > b.popularity))[0].id;
-        // artistIDs.push(artistID);
-        spotifyApi.getArtistTopTracks(artistID, 'US').then (
-          function(data) {
-            tracks = (data.body.tracks[0].uri).toString();
+    setTimeout(function timer() {
+      spotifyApi.searchArtists(artists[i]).then(
+        function(data) {
+          const artistID = data.body.artists.items.sort((a,b) => (a.popularity > b.popularity))[0].id;
+          // artistIDs.push(artistID);
+          spotifyApi.getArtistTopTracks(artistID, 'US').then (
+            function(data) {
+              tracks = (data.body.tracks[0].uri).toString();
 
-            // Add tracks to a playlist
-            spotifyApi.addTracksToPlaylist(playlistID, [tracks])
-              .then(function(data) {
-                if (i === artists.length - 1) {
-                  // open(`https://open.spotify.com/playlist/${playlistID}`);
-                }
-              }, function(err) {
-                console.log('Something went wrong!', err);
-              });
-          }
-        )
-      },
-      function(err) {
-        console.error(err);
-      }
-    );
+              // Add tracks to a playlist
+              spotifyApi.addTracksToPlaylist(playlistID, [tracks])
+                .then(function(data) {
+                  if (i === artists.length - 1) {
+                    // open(`https://open.spotify.com/playlist/${playlistID}`);
+                  }
+                }, function(err) {
+                  console.log('Something went wrong!', err);
+                });
+            }
+          )
+        },
+        function(err) {
+          console.error(err);
+        }
+      );
+    }, i * 1000)
   }
 
 
